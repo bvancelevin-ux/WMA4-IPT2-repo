@@ -455,6 +455,94 @@
             gap: 18px;
             margin-top: 12px;
             flex-wrap: nowrap;
+            background: linear-gradient(120deg, rgba(76,175,80,0.12), rgba(44,166,255,0.08));
+            border: 2px solid rgba(76,175,80,0.18);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        }
+        body.night .contact-row {
+            background: linear-gradient(120deg, rgba(22,58,42,0.55), rgba(16,26,52,0.55));
+            border-color: rgba(166,213,255,0.18);
+            box-shadow: 0 10px 26px rgba(0,0,0,0.4);
+        }
+        .contact-row form {
+            display: grid;
+            gap: 10px;
+            min-width: 100%;
+            background: rgba(255,255,255,0.9);
+            border-radius: 14px;
+            padding: 18px 20px;
+            border: 2px solid rgba(44,166,255,0.18);
+            box-shadow:
+                inset 0 3px 8px rgba(255,255,255,0.65),
+                inset 0 -3px 8px rgba(0,0,0,0.05),
+                0 10px 26px rgba(0,0,0,0.12);
+        }
+        body.night .contact-row form {
+            background: rgba(16,26,52,0.85);
+            border-color: rgba(166,213,255,0.28);
+            box-shadow:
+                inset 0 3px 8px rgba(255,255,255,0.12),
+                inset 0 -3px 8px rgba(0,0,0,0.45),
+                0 12px 28px rgba(0,0,0,0.45);
+        }
+        .contact-row form label {
+            font-weight: 800;
+            color: var(--color-text-dark);
+            letter-spacing: 0.4px;
+        }
+        body.night .contact-row form label {
+            color: #eaf4ff;
+        }
+        .contact-row form input,
+        .contact-row form textarea {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 2px solid rgba(44,166,255,0.25);
+            font-family: inherit;
+            font-size: 0.95em;
+            color: var(--color-text-dark);
+            background: rgba(255,255,255,0.95);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        body.night .contact-row form input,
+        body.night .contact-row form textarea {
+            border-color: rgba(166,213,255,0.35);
+            background: rgba(14,22,38,0.85);
+            color: #eaf0ff;
+        }
+        .contact-row form textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+        .contact-row form input:focus,
+        .contact-row form textarea:focus {
+            outline: none;
+            border-color: rgba(76,175,80,0.6);
+            box-shadow: 0 0 0 3px rgba(76,175,80,0.18);
+        }
+        body.night .contact-row form input:focus,
+        body.night .contact-row form textarea:focus {
+            border-color: rgba(166,213,255,0.7);
+            box-shadow: 0 0 0 3px rgba(166,213,255,0.25);
+        }
+        .contact-row form button {
+            margin-top: 6px;
+            border: none;
+            border-radius: 999px;
+            padding: 10px 16px;
+            font-weight: 800;
+            font-size: 0.95em;
+            color: #fff;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-row form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.22);
         }
 
         .contact-info {
@@ -663,14 +751,14 @@
                 <div style="display:flex; align-items:center; gap:10px; justify-content:space-between;">
                     <div style="display:flex; align-items:center; gap:8px; font-weight:800; color:#2f6b2f">
                         <span>🌞</span>
-                        <span>Garden Level</span>
+                        <span>GARDENER PROGRESS</span>
                     </div>
                     <div class="badges" id="badges"></div>
                 </div>
                 <div class="level-bar"><div class="fill" id="levelFill"></div></div>
             </section>
             <section class="section personal-data" id="personal" data-icon="🌱">
-                <h2>GARDEN PROFILE</h2>
+                <h2>GARDENER PROFILE</h2>
                 <ul>
                     <li>👤 <strong>Born:</strong> October 24, 2004</li>
                     <li>🇵🇭 <strong>Citizenship:</strong> Filipino</li>
@@ -683,7 +771,7 @@
             </section>
 
             <section class="section skills" id="skills" data-icon="🧰">
-                <h2>TOOLS & ABILITIES</h2>
+                <h2>GARDENER ABILITIES</h2>
                 <ul>
                     <li>🧠 Problem Solving & Critical Thinking</li>
                     <li>🔍 Research and Analytics</li>
@@ -691,7 +779,7 @@
                     <li>🚀 Adaptability & Fast Learning</li>
                 </ul>
 
-                <h2 style="margin-top:22px;">TECHNICAL SKILLS</h2>
+                <h2 style="margin-top:22px;">GARDENER TOOLS</h2>
                 <ul>
                     <li>🌐 Network Configuration</li>
                     <li>🛡️ Cybersecurity Fundamentals</li>
@@ -702,7 +790,7 @@
             </section>
 
             <section class="section hobbies" id="hobbies" data-icon="🌸">
-                <h2>GARDEN ACTIVITIES</h2>
+                <h2>GARDENER HOBBIES</h2>
                 <ul>
                     <li>📖 Reading Manhwa</li>
                     <li>🎧 Listening to Music</li>
@@ -712,7 +800,7 @@
             </section>
 
             <section class="section education-full" id="education" data-icon="🌿">
-                <h2>GROWTH TIMELINE</h2>
+                <h2>GARDENER GROWTH</h2>
                 <ul>
                     <li class="education-item">
                         <span class="year">2022 - Present</span>
@@ -738,24 +826,16 @@
             </section>
 
             <section class="section" id="contact" aria-label="Get in Touch" data-icon="📫">
-                <h2>PLANT A MESSAGE</h2>
-                <div class="contact-row">
-                    <div class="contact-info" style="min-width:240px;">
-                        <div><strong>Phone:</strong> <a href="tel:+639935387283" style="color:inherit; text-decoration:none;">0993-538-7283</a></div>
-                        <div><strong>Email:</strong> <a href="mailto:atchazoj6@gmail.com" style="color:inherit; text-decoration:none;">atchazoj6@gmail.com</a></div>
-                    </div>
+                <h2>PLANT A MESSAGE FOR THE GARDENER</h2>
+                    <div class="contact-row">
+                        <form action="https://formspree.io/f/xrbrbybd" method="POST">
+                            <label>Your email:</label>
+                            <input type="email" name="email">
+                            <label>Your message:</label>
+                            <textarea name="message"></textarea>
+                            <button type="submit">Send</button>
+                        </form>
                     <div style="flex:1"></div>
-                    <div class="contact-links" aria-hidden="false">
-                        <a href="https://www.facebook.com/jk.atzo" title="Facebook">
-                            <img src="images/Facebook.png" alt="Facebook" onerror="this.style.display='none'">
-                        </a>
-                        <a href="https://x.com/StJak33y" title="X / Twitter">
-                            <img src="images/X.png" alt="X (Twitter)" onerror="this.style.display='none'">
-                        </a>
-                        <a href="https://github.com/Tosshhii" title="GitHub">
-                            <img src="images/github.png" alt="GitHub" onerror="this.style.display='none'">
-                        </a>
-                    </div>
                 </div>
             </section>
         </main>
