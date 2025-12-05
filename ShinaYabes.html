@@ -1,390 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shina Yabes - Portfolio</title>
-  <style>
-    body {
-        font-family: "Segoe UI", Tahoma, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(100deg, #000, #5e0000);
-        color: #111;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shina Yabes - Portfolio</title>
+<style>
+/* Basic resets */
+body, html { margin:0; padding:0; font-family: "Segoe UI", Tahoma, sans-serif; scroll-behavior: smooth; }
 
-    h1, h2 {
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
+/* Roblox-inspired maximalist colors */
+:root {
+  --primary: #ff5c5c;
+  --secondary: #2a9df4;
+  --bg-dark: #0b0b0b;
+  --card-bg: #1a1a1a;
+  --text-light: #fff;
+  --accent: #ffce00;
+  --glow: rgba(255, 206, 0, 0.6);
+}
 
-    a {
-        transition: 0.3s ease;
-    }
+body { background: var(--bg-dark); color: var(--text-light); }
 
-    header {
-        background: linear-gradient(120deg, #000, #2b2a2d);
-        color: #ff2d2d;
-        padding: 15px 10%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-    }
+/* Header */
+header {
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding: 15px 5%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  position: sticky; /* keeps header visible on scroll */
+  top: 0;            /* stick to top */
+  width: 100%;
+  z-index: 9999;     /* make sure it's above everything */
+  box-shadow: 0 0 20px var(--accent);
+  transition: all 0.3s ease-in-out;
+}
 
-    header h1 {
-        color: #ff2d2d;
-        text-shadow: 0 0 8px #8b3030, 0 0 8px #8b3030, 0 0 25px rgba(135, 30, 30, 0.608);
-        transition: text-shadow 0.3s ease, transform 0.3s ease;
-    }
+header.scrolled {
+  box-shadow: 0 0 35px var(--glow);
+  background: linear-gradient(90deg, var(--secondary), var(--primary));
+}
 
-    header h1:hover {
-        text-shadow: 0 0 8px #8b3030, 0 0 8px #8b3030, 0 0 25px rgba(135, 30, 30, 0.608);
-        transform: scale(1.05);
-    }
+header h1 a { color: #fff; text-decoration: none; font-size: 2rem; font-weight: bold; }
+header h1 a:hover { transform: scale(1.1); text-shadow: 0 0 15px var(--glow); transition:0.3s; }
 
-    header h1 a {
-        display: inline-block;
-        color: inherit;
-        text-decoration: none;
-        cursor: pointer;
-    }
+nav a {
+  color: #fff; text-decoration: none; margin-left: 20px; font-weight:bold;
+  padding:6px 12px; border-radius:5px;
+  transition: all 0.3s;
+}
+nav a:hover { background: var(--accent); color:#000; transform: scale(1.15); text-shadow: 0 0 10px var(--glow); }
 
-    nav a {
-        color: #fff;
-        text-decoration: none;
-        margin-left: 20px;
-        font-weight: bold;
-        padding: 6px 10px;
-        border-radius: 4px;
-    }
+/* Hero Section */
+#hero {
+  display:flex; justify-content: space-between; align-items:center;
+  padding:80px 10%; background: linear-gradient(45deg,var(--secondary),var(--primary));
+  border-radius:15px; margin: 40px auto; box-shadow:0 0 40px rgba(255,255,255,0.25);
+  animation: fadeIn 1.2s ease-in-out;
+}
+#hero div:first-child { max-width:600px; }
+#hero h2 { font-size:3rem; margin-bottom:20px; color:#fff; text-shadow:0 0 15px var(--glow); }
+#hero p { font-size:1.2rem; line-height:1.6; color:#f5f5f5; text-shadow:0 0 8px rgba(0,0,0,0.5); }
+#hero img {
+  width: 280px; 
+  border-radius: 15px; 
+  box-shadow:0 0 35px var(--glow); 
+  transition:0.3s;
+  animation: float 8s ease-in-out infinite; /* added floating animation */
+}
+#hero img:hover { transform: scale(1.15) rotate(5deg); box-shadow:0 0 60px var(--glow); }
 
-    nav a:hover {
-        background: #ff2d2d;
-        color: #fff;
-        box-shadow: 0 0 8px #ff2d2d;
-    }
+/* Sections */
+section { padding:60px 10%; margin:40px auto; border-radius:15px; background: var(--card-bg); box-shadow: 0 0 30px rgba(255,255,255,0.05); animation: fadeInUp 1s ease-in-out; }
+section h2 { text-align:center; font-size:2.5rem; color: var(--accent); margin-bottom:40px; text-shadow:0 0 15px var(--glow); }
 
-    .hero {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 70px 10%;
-        background: linear-gradient(120deg, #000, #2b2a2d);
-        color: #fff;
-        font-size: 20px;
-        border: 5px solid #ff2d2d;
-        border-radius: 12px;
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-        margin: 40px auto;
-    }
+/* Cards for Projects/Seminars/Resume */
+.card {
+  background: var(--bg-dark); padding:25px; margin:20px 0;
+  border-radius:12px; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.card:hover { transform: translateY(-7px); box-shadow: 0 10px 30px var(--glow); background: linear-gradient(90deg,var(--primary),var(--secondary));}
+.card a { text-decoration:none; font-weight:bold; color: var(--accent); }
+.card a:hover { text-decoration: underline; color:#fff; text-shadow:0 0 10px var(--glow); }
 
-    .hero:hover {
-        transform: scale(1.02);
-        transition: all 0.3s ease-in-out;
-    }
+/* Button style for Seminars link */
+.btn {
+  display:inline-block; padding:12px 25px; background: var(--accent); color:#000;
+  font-weight:bold; border-radius:12px; margin-top:15px; text-decoration:none;
+  transition: 0.3s; box-shadow:0 0 15px var(--glow);
+}
+.btn:hover { background: #fff; color:#000; transform: scale(1.1); box-shadow:0 0 25px var(--glow); }
 
-    .hero img {
-        width: 280px;
-        border: 5px solid #fff;
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
+/* Skills */
+.skills { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.skill { background: var(--primary); color:#000; padding:20px 25px; border-radius:12px; font-weight:bold; text-shadow:0 0 8px #000; transition:0.3s; }
+.skill:hover { transform: scale(1.1); box-shadow:0 0 20px var(--glow);}
 
-    .hero h2 {
-        font-size: 50px;
-        font-weight: bold;
-        color: #ff2d2d;
-        text-align: left;
-        margin: 0 0 20px 0;
-    }
+/* Contact */
+#contact { text-align:center; }
+#contact a { color: var(--accent); font-weight:bold; text-decoration:none; }
+#contact a:hover { color:#fff; text-shadow:0 0 12px var(--glow); }
 
-    .hero p {
-        font-size: 20px;
-        line-height: 1.6;
-        text-align: left;
-        max-width: 720px;
-    }
+/* Social Icons */
+.social-icons img {
+    width:65px; height:65px; margin:10px; border-radius:50%; border:2px solid var(--accent);
+    background:#fff; transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.social-icons img:hover {
+    transform: scale(1.35) rotate(10deg);
+    box-shadow:0 0 30px var(--glow); background: var(--accent);
+}
 
-    .hero img:hover {
-        transform: scale(1.1) rotate(2deg);
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-    }
+/* Footer */
+footer { text-align:center; padding:20px; background:#111; color:#aaa; box-shadow:0 -3px 15px rgba(255,255,255,0.1); }
 
-    section h2 {
-        text-align: center;
-        margin-bottom: 30px;
-        color: #ff2d2d;
-    }
+/* Animations */
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+@keyframes fadeInUp { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+@keyframes float {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(10px, -10px) rotate(2deg); }
+  50%  { transform: translate(-10px, 10px) rotate(-2deg); }
+  75%  { transform: translate(15px, 5px) rotate(1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
 
-    #about {
-        background: linear-gradient(120deg, #000, #2b2a2d);
-        padding: 70px 10%;
-        color: #fff;
-        text-align: center;
-        border: 5px solid #ff2d2d;
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        font-size: 30px;
-    }
-
-    #about:hover {
-        transform: scale(1.02);
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-    }
-
-    #about h2 {
-        margin-bottom: 30px;
-        color: #ff2d2d;
-    }
-
-    .about-container {
-        display: inline-block;
-        text-align: left;
-    }
-
-    .about-item {
-        background: #fff;
-        color: #000;
-        padding: 15px;
-        margin-bottom: 20px;
-        border-left: 5px solid #ff2d2d;
-        transition: transform 0.3s;
-    }
-
-    .about-item:hover {
-        transform: translateX(10px);
-    }
-
-    #education {
-        background: linear-gradient(120deg, #000, #2b2a2d);
-        padding: 60px 10%;
-        border: 5px solid #ff2d2d;
-        border-radius: 12px;
-        font-size: 30px;
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-        margin: 40px auto;
-        transition: all 0.3s ease-in-out;
-    }
-
-    #education:hover {
-        transform: scale(1.02);
-    }
-
-    .edu-item {
-        background: #fff;
-        padding: 20px;
-        margin-bottom: 20px;
-        border: 3px solid #111;
-        border-radius: 6px;
-        font-weight: bold;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .edu-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        border-color: #ff2d2d;
-    }
-
-    #skills {
-        background: linear-gradient(120deg, #000, #2b2a2d);
-        padding: 60px 10%;
-        border: 5px solid #ff2d2d;
-        border-radius: 12px;
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-        margin: 40px auto;
-        transition: all 0.3s ease-in-out;
-        text-align: center;
-        color: #fff;
-        font-size: 30px;
-    }
-
-    #skills:hover {
-        transform: scale(1.02);
-    }
-
-    .skills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-
-    .skill {
-        background: #fff;
-        color: #111;
-        padding: 20px 30px;
-        border-radius: 8px;
-        border: 3px solid #111;
-        font-weight: bold;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    }
-
-    .skill:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        border-color: #ff2d2d;
-    }
-
-    #contact {
-        background: radial-gradient(circle at top, #111, #000);
-        color: #fff;
-        text-align: center;
-        padding: 60px 10%;
-        font-size: 30px;
-        border: 5px solid #ff2d2d;
-        border-radius: 12px;
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-        margin: 40px auto;
-        transition: all 0.3s ease-in-out;
-    }
-
-    #contact:hover {
-        transform: scale(1.02);
-        box-shadow: 0 0 25px rgba(135, 30, 30, 0.608);
-    }
-
-    #contact a {
-        color: #ff2d2d;
-        font-weight: bold;
-        text-decoration: none;
-        transition: color 0.3s, text-shadow 0.3s;
-    }
-
-    #contact a:hover {
-        color: #fff;
-        text-shadow: 0 0 12px #ff2d2d, 0 0 24px #ff2d2d;
-    }
-
-    .social-icons img {
-        width: 55px;
-        height: 55px;
-        margin: 15px;
-        border-radius: 50%;
-        border: 2px solid #ff2d2d;
-        background: #fff;
-        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-    }
-
-    .social-icons img:hover {
-        transform: scale(1.25) rotate(5deg);
-        box-shadow: 0 0 20px #ff2d2d;
-        background: #ff2d2d;
-    }
-
-    footer {
-      background: #000;
-      color: #aaa;
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-    }
-  </style>
+/* Responsive */
+@media(max-width:900px){
+  #hero { flex-direction: column; text-align:center; }
+  #hero img { margin-top:20px; }
+}
+</style>
 </head>
-
 <body>
 
-    <header>
-        <h1><a href="#hero">SHINA YABES</a></h1>
+<header>
+  <h1><a href="#hero">SHINA YABES</a></h1>
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#seminars">Seminars</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-        <nav class="top-nav">
-            <a href="index.html">Home</a>
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-        </nav>
+<section id="hero">
+  <div>
+    <h2>Hello, I'm Shina!</h2>
+    <p>A motivated and adaptable professional with a passion for creativity, problem-solving, and delivering high-quality outcomes. 
+    Committed to continuous growth and contributing effectively to projects that require strategic thinking, innovation, and collaboration.</p>
+  </div>
+  <div>
+    <img src="images/shina.png" alt="shina's avatar">
+  </div>
+</section>
 
-    </header>
+<section id="about">
+  <h2>About Me</h2>
+  <p><strong>Address:</strong> Concepcion, Tarlac, Philippines</p>
+  <p><strong>Birthdate:</strong> February 11, 2004</p>
+  <p><strong>Height:</strong> 164 cm</p>
+  <p><strong>Weight:</strong> 45 kg</p>
+  <p><strong>Status:</strong> Single</p>
+  <p><strong>Citizenship:</strong> Filipino</p>
+  <p><strong>Language(s):</strong> English, Filipino</p>
+</section>
 
-    <section id="hero" class="hero">
-        <div>
-            <h2>Hello, I'm Shina!</h2>
+<section id="education">
+  <h2>Education</h2>
+  <div class="card"><strong>Elementary:</strong> Concepcion South Elementary School (2009 - 2016)</div>
+  <div class="card"><strong>High School:</strong> Benigno S. Aquino National High School (2016 - 2022)</div>
+  <div class="card"><strong>College:</strong> Tarlac State University — BS Information Technology (2022 - 2026)</div>
+</section>
 
-            <p>A motivated and adaptable professional with a passion for creativity, problem-solving, and delivering high-quality outcomes. 
-                Committed to continuous growth and contributing effectively to projects that require strategic thinking, innovation, and collaboration.</p>
-        </div>
+<section id="skills">
+  <h2>Professional Skills</h2>
+  <div class="skills">
+    <div class="skill">Adaptability</div>
+    <div class="skill">Time Management</div>
+    <div class="skill">Problem Solving & Critical Thinking</div>
+    <div class="skill">Organization</div>
+    <div class="skill">Emotional Intelligence</div>
+  </div>
+  <h2>Technical Skills</h2>
+  <div class="skills">
+    <div class="skill">Microsoft 365</div>
+    <div class="skill">HTML, CSS, JS, SQL</div>
+    <div class="skill">GitHub</div>
+    <div class="skill">Basic Networking</div>
+  </div>
+</section>
 
-        <div>
-            <img src="images/shina.png" alt="shina's avatar">
-        </div>
-    </section>
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="card">
+    <strong>VisioLearn</strong><br>
+    <a href="https://yourvisiolearsite.com" target="_blank">View Website</a>
+  </div>
+</section>
 
-    <section id="about">
-        <div class="about-content">
-            <h2>About Me</h2>
-            <p><strong>Address:</strong> Concepcion, Tarlac, Philippines</p>
-            <p><strong>Birthdate:</strong> February 11, 2004</p>
-            <p><strong>Age:</strong> 21</p>
-            <p><strong>Height:</strong> 164 cm</p>
-            <p><strong>Weight:</strong> 45 kg</p>
-            <p><strong>Status:</strong> Single</p>
-            <p><strong>Citizenship:</strong> Filipino</p>
-            <p><strong>Language(s):</strong> English, Filipino</p>
-         </div>
-    </section>
+<section id="seminars">
+  <h2>Seminars & Certificates</h2>
+  <a href="ShinaYabes_Seminars.html" class="btn">View All Seminars & Certificates</a>
+</section>
 
-    <section id="education">
-        <h2>Education</h2>
-        <div class="edu-item">
-            <strong>Elementary</strong><br>
-            Concepcion South Elementary School (2009 - 2016)
-        </div>
+<section id="resume">
+  <h2>Resume</h2>
+  <div class="card">
+    <a href="documents/ShinaYabes_Resume.pdf" target="_blank">View / Download Resume (PDF)</a>
+  </div>
+</section>
 
-        <div class="edu-item">
-            <strong>High School</strong><br>
-            Benigno S. Aquino National High School (2016 - 2022)
-        </div>
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:shinabyabes@gmail.com">shinabyabes@gmail.com</a></p>
+  <p>Phone: <a href="tel:+639158842183">+63 9158842183</a></p>
+  <div class="social-icons">
+      <a href="https://github.com/shinaby" target="_blank" title="GitHub">
+          <img src="images/github.png" alt="GitHub">
+      </a>
+      <a href="https://www.facebook.com/shinabyabes" target="_blank" title="Facebook">
+          <img src="images/facebook.png" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/ssiinnaa____/" target="_blank" title="Instagram">
+          <img src="images/Instagram.png" alt="Instagram">
+      </a>
+  </div>
+</section>
 
-        <div class="edu-item">
-            <strong>College</strong><br>
-            Tarlac State University — BS Information Technology (2022 - Present)
-        </div>
-    </section>
+<footer>
+  <p>© 2025 Shina Yabes. All rights reserved.</p>
+</footer>
 
-    <section id="skills">
-        <h2>Interpersonal Skills</h2>
-        <div class="skills">
-            <div class="skill">Adaptability</div>
-            <div class="skill">Time Management</div>
-            <div class="skill">Problem Solving & Critical Thinking</div>
-            <div class="skill">Organization</div>
-            <div class="skill">Emotional Intelligence</div>
-        </div>
-        <h2>Technical Skills</h2>
-        <div class="skills">
-            <div class="skill">Microsoft 365</div>
-            <div class="skill">HTML, CSS, JS, SQL</div>
-            <div class="skill">GitHub</div>
-            <div class="skill">Basic Networking</div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:shinabyabes@gmail.com">shinabyabes@gmail.com</a></p>
-        <p>Phone: <a href="tel:+639158842183">+63 9158842183</a></p>
-        <div class="social-icons">
-            <a href="https://github.com/shinaby" target="_blank" title="GitHub">
-                <img src="images/github.png" alt="GitHub">
-            </a>
-            <a href="https://www.facebook.com/shinabyabes" target="_blank" title="Facebook">
-                <img src="images/facebook.png" alt="Facebook">
-            </a>
-            <a href="https://www.instagram.com/ssiinnaa____/" target="_blank" title="IG (Instagram)">
-                <img src="images/Instagram.png" alt="IG (Instagram)">
-            </a>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2025 Shina Yabes. All rights reserved.</p>
-    </footer>
+<script>
+// Glow header on scroll
+window.addEventListener('scroll', function() {
+  const header = document.querySelector('header');
+  if(window.scrollY > 50){
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+</script>
 
 </body>
 </html>
