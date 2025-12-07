@@ -275,103 +275,18 @@
                         <div class="school-location">🏫 [Saint Vincent School Foundation inc.]<br>[Paniqui, Tarlac, Philippines]</div>
                     </li>
                     <li>
-                        <span class="year">[2014 – 2020]</span>
+                        <span class="year">[2016 – 2020]</span>
                         <div class="school-name">Junior High School</div>
                         <div class="school-location">🏫 [Saint Vincent School Foundation inc.]<br>[Paniqui, Tarlac, Philippines]</div>
                     </li>
                     <li>
-                        <span class="year">[2008 – 2014]</span>
+                        <span class="year">[2010 – 2016]</span>
                         <div class="school-name">Elementary</div>
                         <div class="school-location">🏫 [PO Domingo Montessori School inc.]<br>[Paniqui, Tarlac, Philippines]</div>
                     </li>
                 </ul>
             </div>
-<div class="section current-project">
-<div id="quote-box" style="
-    background: linear-gradient(135deg, var(--color-background-rose), var(--color-background-rose-2));
-    padding: 20px;
-    border-radius: 15px;
-    border-left: 6px solid var(--color-tertiary);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    font-weight: 600;
-    color: #444;
-    min-height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: opacity 300ms ease, transform 300ms ease;
-    opacity: 1;
-">
-    Loading quote...
-</div>
-
-<div style="margin-top:12px;">
-    <button id="new-quote-btn" 
-        style="
-            padding: 10px 16px;
-            background: var(--color-secondary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-        ">
-        🔄 New Quote
-    </button>
-</div>
-
-<script>
-(async function () {
-    const quoteBox = document.getElementById('quote-box');
-    const button = document.getElementById('new-quote-btn');
-    const API = 'https://dummyjson.com/quotes/random';
-
-
-    function showText(html) {
-        quoteBox.style.opacity = '0';
-        quoteBox.style.transform = 'translateY(6px)';
-        setTimeout(() => {
-            quoteBox.innerHTML = html;
-            quoteBox.style.opacity = '1';
-            quoteBox.style.transform = 'translateY(0)';
-        }, 220);
-    }
-
-    async function fetchQuote() {
-        try {
-            showText('Loading quote...');
-            const res = await fetch(API);
-            if (!res.ok) throw new Error('Network response not ok');
-            const data = await res.json();
-
-            const quote = data.quote || data.content || 'No quote content.';
-            const author = data.author || 'Unknown';
-
-            showText(`“${escapeHtml(quote)}”<br><span style="color: var(--color-primary); font-weight: 800;">— ${escapeHtml(author)}</span>`);
-        } catch (err) {
-            console.error('Quote fetch error:', err);
-            showText("<span style='color: red;'>Failed to load quote. Try again or serve the page over HTTP (use Live Server / python -m http.server).</span>");
-        }
-    }
-
- 
-    function escapeHtml(s) {
-        return String(s)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-    }
-
-
-    button.addEventListener('click', fetchQuote);
-
-
-    await fetchQuote();
-})();
-</script>
-
+        </main>
+    </div>
 </body>
 </html>
