@@ -1,78 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shina Yabes - Seminars & Certificates</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Shina Yabes — Seminars & Certificates</title>
+
 <style>
-body, html { margin:0; padding:0; font-family:"Segoe UI", Tahoma, sans-serif; background:#0b0b0b; color:#fff; scroll-behavior:smooth; }
-:root {
-  --primary:#ff5c5c;
-  --secondary:#2a9df4;
-  --card-bg:#1a1a1a;
-  --accent:#ffce00;
-}
-header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:15px 10%; background:linear-gradient(90deg,var(--primary),var(--secondary));
-  position:sticky; top:0; z-index:1000;
-}
-header h1 a { color:#fff; text-decoration:none; font-size:2rem; font-weight:bold; }
-header h1 a:hover { transform:scale(1.05); transition:0.3s; }
-nav a { color:#fff; text-decoration:none; margin-left:20px; font-weight:bold; padding:6px 12px; border-radius:5px; transition:0.3s;}
-nav a:hover { background:var(--accent); color:#000; transform:scale(1.1);}
-section { padding:60px 10%; margin:40px auto; border-radius:15px; background:var(--card-bg); box-shadow:0 0 25px rgba(255,255,255,0.05);}
-section h2 { text-align:center; font-size:2.5rem; color: var(--accent); margin-bottom:40px; }
-.card { background:#0f0f0f; padding:25px; margin:20px 0; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.3); transition:transform 0.3s, box-shadow 0.3s;}
-.card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(255,206,0,0.5);}
-.card a { text-decoration:none; font-weight:bold; color: var(--accent);}
-.card a:hover { text-decoration:underline; color:#fff;}
-footer { text-align:center; padding:15px; background:#111; color:#aaa; }
+  :root{
+    --bg-dark: #050406;
+    --panel: #0f0f12;
+    --neon-pink: #ff2d95;
+    --neon-purple: #7b2cff;
+    --neon-blue: #26d0ff;
+    --accent: #ffd84a;
+    --muted: #bdbdbd;
+    --glass: rgba(255,255,255,0.04);
+  }
+
+  * { 
+    box-sizing:border-box
+  }
+
+  html,body {
+    height:100%
+  }
+
+  body{
+    margin:0;
+    font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, #030104 0%, #07060a 100%);
+    color: #fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x: hidden;
+  }
+
+  a {
+    color:inherit; 
+    text-decoration:none;
+  }
+
+  img { 
+    max-width:100%; 
+    display:block
+  }
+
+  header {
+    position:sticky; 
+    top:0; 
+    z-index:9999;
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between;
+    padding:14px 6%;
+    background: linear-gradient(90deg, rgba(255,45,149,0.06), rgba(123,44,255,0.03));
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+  }
+
+  .brand {
+    display:flex; 
+    align-items:center; 
+    gap:24px;
+    font-weight:700; 
+    letter-spacing:2px;
+  }
+
+  .brand .glyph {
+    font-size:2.5rem;
+    color:var(--neon-pink);
+    text-shadow: 0 0 12px rgba(255,45,149,0.8), 0 0 50px rgba(123,44,255,0.3);
+  }
+
+  .brand a {
+    font-size: 1.5rem;   
+    font-weight: 800;       
+    color: #fff;
+    text-decoration: none;
+    text-shadow:
+      0 0 5px #ff2d95,
+      0 0 10px #ff2d95,
+      0 0 20px #ff2d95,
+      0 0 30px #7b2cff,
+      0 0 40px #7b2cff,
+      0 0 50px #7b2cff;
+    transition: text-shadow 0.3s ease-in-out;
+  }
+
+  .brand a:hover {
+    text-shadow:
+      0 0 8px #ff2d95,
+      0 0 15px #ff2d95,
+      0 0 25px #ff2d95,
+      0 0 35px #7b2cff,
+      0 0 45px #7b2cff,
+      0 0 60px #7b2cff;
+  }
+
+  nav {
+    display:flex; 
+    gap:12px; 
+    align-items:center;
+  }
+  
+  nav a {
+    padding:6px 12px; 
+    border-radius:8px; 
+    font-weight:600;
+    border:1px solid rgba(255,255,255,0.03);
+    transition: all .22s ease;
+    color:#eee; 
+    text-decoration:none; 
+    font-size:0.95rem;
+  } 
+
+  nav a:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 0 30px rgba(255,45,149,0.5), 0 0 50px rgba(123,44,255,0.35);
+    background: linear-gradient(90deg, rgba(255,45,149,0.12), rgba(123,44,255,0.08));
+    color: #000;
+    border-color: rgba(255,45,149,0.18);
+  }
+
+  main { 
+    padding:120px 6% 80px; 
+    max-width:1400px; 
+    margin:0 auto; 
+  }
+
+  h1 { 
+    font-size:2rem; 
+    color:var(--accent); 
+    text-shadow:0 0 10px rgba(255,216,74,0.06); 
+  }
+
+  section.card-block{
+    margin-top:56px; 
+    padding:26px; 
+    border-radius:14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    border:1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  }
+
+  section.card-block h2 { 
+    margin:6px 0 18px; 
+    color:var(--accent); 
+    font-size:1.6rem; 
+    text-shadow:0 0 10px rgba(255,220,90,0.06) 
+  }
+
+  .seminar-grid { 
+    display:grid; 
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); 
+    gap:18px; 
+    margin-top:8px; 
+  }
+
+  .seminar {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    padding:16px; 
+    border-radius:12px; 
+    min-height:150px;
+    border:1px solid rgba(255,255,255,0.03);
+    transition:transform .28s, box-shadow .28s;
+    display:flex; 
+    flex-direction:column; 
+    justify-content:space-between;
+  }
+
+  .seminar:hover {
+    transform:translateY(-8px);
+    box-shadow: 0 0 30px rgba(255,45,149,0.5), 0 0 50px rgba(123,44,255,0.35);
+  }
+
+  .seminar h3 { 
+    margin:6px 0; 
+    font-size:1.05rem 
+  }
+
+  .seminar p { 
+    color: #d7d7e0; 
+    font-size:0.92rem; 
+    margin:6px 0 12px 
+  }
+
+  .btn {
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center;
+    padding: 10px 16px; 
+    margin-top: 12px;
+    border-radius: 12px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    background: linear-gradient(90deg, #ff2d95, #7b2cff);
+    color: #fff; 
+    text-decoration: none;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 20px rgba(255,45,149,0.5), 0 0 30px rgba(123,44,255,0.35);
+  }
+
+  footer{
+    margin-top:70px; 
+    padding:36px 6%; 
+    text-align:center; 
+    color: #9a9aa8;
+    border-top: 1px solid rgba(255,255,255,0.02);
+  }
+
+  @media (max-width:980px){
+    main{ 
+      padding:80px 5% 60px 
+    }
+  }
+
+  @media (max-width:560px){
+    header { 
+      padding:12px 5% 
+    }
+    .brand a { 
+      font-size:1rem 
+    }
+    nav { 
+      display:none 
+    }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1><a href="ShinaYabes.html">SHINA YABES</a></h1>
-  <nav>
-    <a href="ShinaYabes.html">Home</a>
-    <a href="ShinaYabes.html#about">About</a>
-    <a href="ShinaYabes.html#education">Education</a>
-    <a href="ShinaYabes.html#skills">Skills</a>
-    <a href="ShinaYabes.html#projects">Projects</a>
-    <a href="ShinaYabes.html#resume">Resume</a>
-    <a href="ShinaYabes.html#contact">Contact</a>
+  <div class="brand">
+    <span class="glyph">△ ○ □</span>
+    <a href="ShinaYabes.html">SHINA YABES</a>
+  </div>
+
+  <nav aria-label="Main navigation">
+    <a href="ShinaYabes.html">Back</a>
   </nav>
 </header>
 
-<section>
-  <h2>Seminars & Certificates</h2>
+<main>
+  <section id="seminars" class="card-block" aria-labelledby="seminars-title">
+    <h2 id="seminars-title">Seminars & Certificates</h2>
 
-  <div class="card">
-    <strong>Web Development Bootcamp</strong><br>
-    <p>Date: March 2023 | Provider: Code Academy</p>
-    <p>Learned advanced HTML, CSS, JS, and project deployment techniques.</p>
-    <a href="documents/certificate_webdev.pdf" target="_blank">View Certificate</a>
-  </div>
+    <div class="seminar-grid">
+      <article class="seminar">
+        <h3>Internet of Things (IoT) in Smart Cities</h3>
+        <p>Explore how IoT technologies transform urban living, improving connectivity, efficiency, and sustainability in smart cities.</p>
+        <a href="images/YABES_IoT_Seminar.png" target="_blank" class="btn">View Certificate</a>
+      </article>
 
-  <div class="card">
-    <strong>AI & Machine Learning Seminar</strong><br>
-    <p>Date: July 2023 | Provider: Tech University</p>
-    <p>Understanding AI algorithms, neural networks, and their real-world applications.</p>
-    <a href="documents/certificate_ai.pdf" target="_blank">View Certificate</a>
-  </div>
+      <article class="seminar">
+        <h3>HOUR OF CODE: Learn AI and Coding In A Fun & Engaging Way!</h3>
+        <p>Hands-on introduction to coding and AI concepts designed to make learning fun, interactive, and accessible for all skill levels.</p>
+        <a href="images/YABES_HOC_Seminar.png" target="_blank" class="btn">View Certificate</a>
+      </article>
 
-  <div class="card">
-    <strong>Cybersecurity Awareness Training</strong><br>
-    <p>Date: November 2023 | Provider: SecureTech</p>
-    <p>Best practices for online security and protecting personal/professional data.</p>
-    <a href="documents/certificate_cybersecurity.pdf" target="_blank">View Certificate</a>
-  </div>
-
-</section>
+      <article class="seminar">
+        <h3>Data Privacy Awareness</h3>
+        <p>Understand the importance of protecting personal information and learn best practices for maintaining digital privacy.</p>
+        <a href="images/YABES_DP_Seminar.png" target="_blank" class="btn">View Certificate</a>
+      </article>
+    </div>
+  </section>
+</main>
 
 <footer>
-  <p>© 2025 Shina Yabes. All rights reserved.</p>
+  <p>© 2025 Shina Yabes</p>
 </footer>
 
 </body>
