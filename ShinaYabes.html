@@ -550,6 +550,63 @@
       opacity:0.95; 
       filter: drop-shadow(0 6px 18px rgba(255,45,149,0.22)); 
     }
+
+    #contact {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border: 1px solid rgba(255,255,255,0.03);
+      border-radius: 18px;
+      padding: 36px 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    .contact-link {
+      color: var(--neon-blue);
+      text-decoration: none;
+      font-weight:600;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 6px rgba(38,208,255,0.5);
+    }
+
+    .contact-link:hover {
+      color: var(--neon-pink);
+      text-shadow: 0 0 12px rgba(255,45,149,0.7), 0 0 24px rgba(123,44,255,0.5);
+    }
+
+    #contact .social-link {
+      display: inline-block;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    #contact .social-link img {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(255,45,149,0.5)) drop-shadow(0 0 8px rgba(123,44,255,0.3));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    } 
+
+    #contact .social-link:hover img {
+      transform: scale(1.2) rotate(3deg);
+      filter: drop-shadow(0 0 22px rgba(255,45,149,0.8)) drop-shadow(0 0 20px rgba(123,44,255,0.6)) drop-shadow(0 0 12px rgba(38,208,255,0.4));
+    } 
+
+    @media (max-width: 560px) {
+      #contact {
+        padding: 28px 16px;
+    }
+
+      #contact .social-icons {
+        gap: 14px;
+      }
+    }
+
+
+
+
 </style>
 </head>
 
@@ -665,7 +722,7 @@
           <article class="project">
             <h3>VisioLearn (Assistive Quiz Generator System)</h3>
             <p>Voice-enabled quiz generator and web accessibility features for partially sighted users.</p>
-            <a href="#" class="btn secondary" style="padding:8px 12px; font-weight:700">View Site</a>
+            <a href="https://visio-learn.vercel.app/" class="btn secondary" style="padding:8px 12px; font-weight:700">View Site</a>
           </article>
         </div>
       </section>
@@ -678,32 +735,33 @@
       </section>
 
 
-<section id="resume" class="card-block" aria-labelledby="resume-title">
-  <h2 id="resume-title">Resume</h2>
-  <div class="project">
-    <p>View my resume below.</p>
-    <a class="btn secondary" href="documents/ShinaYabes_Resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
-  </div>
-</section>
-
-</section>
-      <section id="contact" class="card-block" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact</h2>
-        <p>Email: <a href="mailto:shinabyabes@gmail.com">shinabyabes@gmail.com</a></p>
-        <p>Phone: <a href="tel:+639158842183">+63 9158842183</a></p>
-
-        <div style="margin-top:14px; display:flex; gap:12px; align-items:center">
-          <a href="https://github.com/shinaby" target="_blank" title="GitHub" aria-label="GitHub">
-            <img src="images/github.png" alt="GitHub" style="width:56px;height:56px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
-          </a>
-          <a href="https://www.facebook.com/shinabyabes" target="_blank" title="Facebook" aria-label="Facebook">
-            <img src="images/facebook.png" alt="Facebook" style="width:56px;height:56px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
-          </a>
-          <a href="https://www.instagram.com/ssiinnaa____/" target="_blank" title="Instagram" aria-label="Instagram">
-            <img src="images/Instagram.png" alt="Instagram" style="width:56px;height:56px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
-          </a>
+      <section id="resume" class="card-block" aria-labelledby="resume-title">
+        <h2 id="resume-title">Resume</h2>
+        <div class="project">
+          <p>View my resume below.</p>
+          <a class="btn secondary" href="documents/ShinaYabes_Resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
         </div>
       </section>
+
+      <section id="contact" class="card-block" aria-labelledby="contact-title" style="text-align:center; padding:36px 24px; display:flex; flex-direction:column; align-items:center; gap:20px;">
+        <h2 id="contact-title" style="font-size:2rem; color:var(--neon-pink); text-shadow:0 0 12px rgba(255,45,149,0.5), 0 0 24px rgba(123,44,255,0.3); margin-bottom:12px;">Contact</h2>
+        <div style="font-size:1.1rem; color:#fff; display:flex; flex-direction:column; gap:10px;">
+          <p style="margin:0;">Email: <a href="mailto:shinabyabes@gmail.com" class="contact-link">shinabyabes@gmail.com</a></p>
+          <p style="margin:0;">Phone: <a href="tel:+639158842183" class="contact-link">+63 9158842183</a></p>
+        </div>
+
+        <div class="social-icons" style="margin-top:20px; display:flex; gap:18px; justify-content:center; flex-wrap:wrap;">
+        <a href="https://github.com/shinaby" target="_blank" aria-label="GitHub" class="social-link">
+          <img src="images/github.png" alt="GitHub">
+        </a>
+        <a href="https://www.facebook.com/shinabyabes" target="_blank" aria-label="Facebook" class="social-link">
+          <img src="images/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/ssiinnaa____/" target="_blank" aria-label="Instagram" class="social-link">
+          <img src="images/Instagram.png" alt="Instagram">
+        </a>
+        </div>
+    </section>
 
       <footer>
         <p>© 2025 Shina Yabes</p>
