@@ -9,11 +9,11 @@
   * {
     box-sizing: border-box;
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
   }
 
   html, body {
-    margin: 0;
-    padding: 0;
     height: 100%;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #d0e8ff, #ffffff 70%);
@@ -73,7 +73,7 @@
   .layout {
     display: flex;
     flex-direction: column;
-    flex: 1; 
+    flex: 1;
     overflow: hidden;
   }
 
@@ -81,7 +81,7 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    flex: 1; 
+    flex: 1;
     overflow-y: auto;
   }
 
@@ -101,16 +101,22 @@
 
   section {
     margin-bottom: 30px;
-    background-color: #ffffff;
+    background-color: #fff;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   }
 
   .section-header {
     font-family: 'Press Start 2P', cursive;
     font-size: 16px;
-    color: #ffffff;
+    color: white;
     padding: 10px 15px;
     margin-bottom: 15px;
     background: linear-gradient(135deg, #4a90e2, #1a73e8, #0d47a1);
@@ -118,29 +124,33 @@
     box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
   }
 
-  .edu-card, .skill-card {
+  .edu-card, .skill-card, .api-card {
     background: linear-gradient(135deg, #e6f0ff, #cce0ff);
     padding: 15px 20px;
     margin-bottom: 15px;
     border-left: 5px solid #1a73e8;
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
   }
 
-  .edu-card:hover, .skill-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  .edu-card:hover,
+  .skill-card:hover,
+  .api-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   }
 
-  .edu-card h3, .skill-card h3 {
+  .edu-card h3,
+  .skill-card h3 {
     margin: 0 0 5px 0;
     color: #1a73e8;
     font-family: 'Press Start 2P', cursive;
     font-size: 14px;
   }
 
-  .edu-card p, .skill-card p {
+  .edu-card p,
+  .skill-card p {
     margin: 0 0 5px 0;
     color: #333;
   }
@@ -174,7 +184,7 @@
   footer {
     text-align: center;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #fff;
     color: #555;
     font-size: 14px;
     border-top: 1px solid #cce0ff;
@@ -182,16 +192,80 @@
     margin-top: 40px;
   }
 
+  .meaning-tab {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 6px 6px 0 0;
+    border-radius: 20px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #4a90e2, #1a73e8);
+    color: white;
+    font-size: 12px;
+    transition: transform 0.2s, background 0.3s;
+  }
+
+  .meaning-tab:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  }
+
+  .part-of-speech {
+    display: inline-block;
+    padding: 3px 8px;
+    margin: 3px 5px 3px 0;
+    border-radius: 12px;
+    font-size: 11px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .noun { background: #ff6b6b; }
+  .verb { background: #4ecdc4; }
+  .adjective { background: #feca57; color: #000; }
+  .adverb { background: #1dd1a1; }
+  .pronoun { background: #576574; }
+  .preposition { background: #ff9ff3; color: #000; }
+  .conjunction { background: #54a0ff; }
+
+  .meaning-content {
+    margin-top: 10px;
+  }
+
+  .example {
+    font-style: italic;
+    margin-left: 10px;
+    color: #555;
+  }
+
+  input[type="text"] {
+    font-size: 14px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #1a73e8;
+    width: 60%;
+  }
+
+  button {
+    font-family: 'Press Start 2P', cursive;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background: #1a73e8;
+    color: white;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #0d47a1;
+  }
 </style>
+
 </head>
 <body>
 
 <header>
   Mark Denver D. Mina
-  <div class="header-subtext">
-    📍 Castillo, Concepcion, Tarlac<br>
-    📧 minamarkdenver@gmail.com | 📞 09387550853
-  </div>
+  <div class="header-subtext">📍 Castillo, Concepcion, Tarlac<br>📧 minamarkdenver@gmail.com | 📞 09387550853</div>
 </header>
 
 <div class="layout">
@@ -201,22 +275,16 @@
     <a href="#education">Education</a>
     <a href="#skills">Skills</a>
     <a href="#certifications">Certifications</a>
+    <a href="#dictionary">Dictionary</a>
     <a href="#contact">Contact</a>
   </div>
 
   <div class="container">
-    <div class="profile">
-      <img src="images/profile.jpg" alt="Mark Denver D. Mina" class="profile-pic">
-    </div>
+    <div class="profile"><img src="images/profile.jpg" alt="Mark Denver D. Mina" class="profile-pic"></div>
 
-    <section id="about">
-      <div class="section-header">📌 About</div>
-      <p>Enthusiastic and motivated with strong communication, teamwork, and problem-solving skills. 
-        Seeking to apply my abilities in a position where I can contribute to the team and gain valuable work experience.</p>
-    </section>
+    <section id="about"><div class="section-header">📌 About</div><p>Enthusiastic and motivated... gain valuable work experience.</p></section>
 
-    <section id="personal">
-      <div class="section-header">🙋 Personal Information</div>
+    <section id="personal"><div class="section-header">🙋 Personal Information</div>
       <p><span class="label">Name:</span> Mark Denver D. Mina</p>
       <p><span class="label">Date of Birth:</span> March 26, 2004</p>
       <p><span class="label">Citizenship:</span> Filipino</p>
@@ -225,28 +293,11 @@
       <p><span class="label">Language:</span> Tagalog, Kapampangan, English</p>
     </section>
 
-    <section id="education">
-      <div class="section-header">🎓 Academic Background</div>
-      <div class="edu-card">
-        <h3>College</h3>
-        <p>Tarlac State University - BSIT Specialized in Web & Mobile App</p>
-        <span class="edu-year">2022 - Present</span>
-      </div>
-      <div class="edu-card">
-        <h3>Senior High School</h3>
-        <p>Benigno S. Aquino National High School (TVL - CSS)</p>
-        <span class="edu-year">2020 - 2022</span>
-      </div>
-      <div class="edu-card">
-        <h3>Junior High School</h3>
-        <p>Benigno S. Aquino National High School</p>
-        <span class="edu-year">2016 - 2020</span>
-      </div>
-      <div class="edu-card">
-        <h3>Elementary</h3>
-        <p>Castillo Elementary School</p>
-        <span class="edu-year">2010 - 2016</span>
-      </div>
+    <section id="education"><div class="section-header">🎓 Academic Background</div>
+      <div class="edu-card"><h3>College</h3><p>Tarlac State University - BSIT Specialized in Web & Mobile App</p><span class="edu-year">2022 - Present</span></div>
+      <div class="edu-card"><h3>Senior High School</h3><p>Benigno S. Aquino National High School (TVL - CSS)</p><span class="edu-year">2020 - 2022</span></div>
+      <div class="edu-card"><h3>Junior High School</h3><p>Benigno S. Aquino National High School</p><span class="edu-year">2016 - 2020</span></div>
+      <div class="edu-card"><h3>Elementary</h3><p>Castillo Elementary School</p><span class="edu-year">2010 - 2016</span></div>
     </section>
 
     <section id="skills">
@@ -283,19 +334,118 @@
       <img src="images/dpa.jpg" alt="Data Privacy Awareness Certificate" style="width:100%; max-width:400px; border-radius:6px; margin-bottom:15px;">
     </section>
 
-    <section id="contact">
-      <div class="section-header">📇 Contact Information</div>
+    <section id="dictionary">
+      <div class="section-header">🔤 Dictionary</div>
+
+      <div class="api-card" style="text-align:center;">
+        <input type="text" id="dictionary-input" placeholder="Type a word...">
+        <button id="search-btn">Search</button>
+      </div>
+
+      <div id="search-result" class="api-card" style="margin-top:20px; display:none;">
+        <p id="search-word"></p>
+        <div id="search-meanings"></div>
+      </div>
+
+      <div class="api-card" id="wotd-card">
+        <h3>📌 Word of the Day</h3>
+        <p id="wotd-word">Loading...</p>
+        <div id="wotd-meanings"></div>
+      </div>
+    </section>
+
+    <section id="contact"><div class="section-header">📇 Contact Information</div>
       <p><span class="label">Location:</span> Castillo, Concepcion, Tarlac</p>
       <p><span class="label">Phone:</span> <a href="tel:09387550853">09387550853</a></p>
       <p><span class="label">Email:</span> <a href="mailto:minamarkdenver@gmail.com">minamarkdenver@gmail.com</a></p>
-
     </section>
 
-    <footer>
-      © 2025 Mark Denver D. Mina
-    </footer>
+    <footer>© 2025 Mark Denver D. Mina</footer>
   </div>
 </div>
+
+<script>
+function posClass(pos){
+  switch(pos.toLowerCase()){
+    case "noun": return "noun";
+    case "verb": return "verb";
+    case "adjective": return "adjective";
+    case "adverb": return "adverb";
+    case "pronoun": return "pronoun";
+    case "preposition": return "preposition";
+    case "conjunction": return "conjunction";
+    default: return "";
+  }
+}
+
+function renderWord(wordEl, meaningsEl, data) {
+
+  const phonetic = data.phonetic || (data.phonetics && data.phonetics[0]?.text) || "";
+  
+  const syllables = data.word.split(/(?=[aeiou])/).join("·");
+  wordEl.innerHTML = `<strong>${syllables}</strong><br><em>${phonetic}</em>`;
+
+  meaningsEl.innerHTML = "";
+
+  const contentEl = document.createElement("div");
+  contentEl.className = "meaning-content";
+  meaningsEl.appendChild(contentEl);
+
+  data.meanings.forEach((m, idx) => {
+    const tab = document.createElement("span");
+    tab.className = "meaning-tab";
+    tab.textContent = m.partOfSpeech;
+
+    tab.addEventListener("click", () => {
+      contentEl.innerHTML = m.definitions.map(d => {
+        const ex = d.example ? `<div class="example">"${d.example}"</div>` : "";
+        return `<div class="part-of-speech ${posClass(m.partOfSpeech)}">${m.partOfSpeech}</div> ${d.definition} ${ex}`;
+      }).join("");
+    });
+
+    meaningsEl.insertBefore(tab, contentEl);
+
+    if (idx === 0) tab.click();
+  });
+}
+
+
+async function loadWordOfTheDay(){
+  try{
+    const words=["innovation","synergy","resilience","ephemeral","curiosity","ambition","clarity","adaptation"];
+    const word=words[Math.floor(Math.random()*words.length)];
+    const res=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+    const data=await res.json();
+    renderWord(document.getElementById("wotd-word"), document.getElementById("wotd-meanings"), data[0]);
+  } catch(err){ document.getElementById("wotd-word").textContent="Error loading word."; }
+}
+
+const input=document.getElementById("dictionary-input");
+const searchBtn=document.getElementById("search-btn");
+const searchWordEl=document.getElementById("search-word");
+const searchMeaningsEl=document.getElementById("search-meanings");
+const searchCard=document.getElementById("search-result");
+
+searchBtn.addEventListener("click", searchWord);
+input.addEventListener("keypress", e=>{ if(e.key==="Enter") searchWord(); });
+
+async function searchWord(){
+  const word=input.value.trim();
+  if(!word) return;
+  searchCard.style.display = "block"; 
+  try{
+    const res=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+    if(!res.ok) throw new Error("Word not found");
+    const data=await res.json();
+    renderWord(searchWordEl, searchMeaningsEl, data[0]);
+  } catch(err){
+    searchWordEl.textContent="";
+    searchMeaningsEl.innerHTML="<p>Word not found</p>";
+  }
+}
+
+loadWordOfTheDay();
+</script>
 
 </body>
 </html>
