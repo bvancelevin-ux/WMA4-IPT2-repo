@@ -258,6 +258,44 @@
   button:hover {
     background: #0d47a1;
   }
+
+  .synonyms, .antonyms {
+  margin-top: 6px;
+  font-size: 0.9em;
+}
+
+.synonyms { color: #2e7d32; }
+.antonyms { color: #c62828; }
+
+.example {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.part-of-speech.synonym {
+  background: #e3f2fd;
+  color: #0d47a1;
+}
+
+.part-of-speech.antonym {
+  background: #fdecea;
+  color: #b71c1c;
+}
+
+.related-list {
+  margin: 6px 0 12px;
+}
+
+.related-word {
+  cursor: pointer;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.related-word:hover {
+  text-decoration: underline;
+}
+
 </style>
 
 </head>
@@ -374,16 +412,39 @@ function posClass(pos){
     case "pronoun": return "pronoun";
     case "preposition": return "preposition";
     case "conjunction": return "conjunction";
+    case "exclamation": return "exclamation";
     default: return "";
   }
 }
 
+function makeClickableWords(words){
+  return [...new Set(words)].map(w =>
+    `<span class="related-word" onclick="searchFromRelated('${w}')">${w}</span>`
+  ).join(", ");
+}
+
+function searchFromRelated(word){
+  input.value = word;
+  searchWord();
+}
+
 function renderWord(wordEl, meaningsEl, data) {
 
-  const phonetic = data.phonetic || (data.phonetics && data.phonetics[0]?.text) || "";
-  
-  const syllables = data.word.split(/(?=[aeiou])/).join("·");
-  wordEl.innerHTML = `<strong>${syllables}</strong><br><em>${phonetic}</em>`;
+  let phoneticText = "";
+  let audioSrc = "";
+
+  if (data.phonetics && data.phonetics.length > 0) {
+    phoneticText = data.phonetics.find(p => p.text)?.text || "";
+    audioSrc = data.phonetics.find(p => p.audio)?.audio || "";
+  }
+
+  const syllables = data.word.split(/(?=[aeiou])/i).join("·");
+
+  wordEl.innerHTML = `
+    <strong>${syllables}</strong><br>
+    <span class="phonetic">${phoneticText || ""}</span>
+    ${audioSrc ? `<button onclick="new Audio('${audioSrc}').play()">🔊</button>` : ""}
+  `;
 
   meaningsEl.innerHTML = "";
 
@@ -397,27 +458,88 @@ function renderWord(wordEl, meaningsEl, data) {
     tab.textContent = m.partOfSpeech;
 
     tab.addEventListener("click", () => {
-      contentEl.innerHTML = m.definitions.map(d => {
-        const ex = d.example ? `<div class="example">"${d.example}"</div>` : "";
-        return `<div class="part-of-speech ${posClass(m.partOfSpeech)}">${m.partOfSpeech}</div> ${d.definition} ${ex}`;
-      }).join("");
-    });
+  contentEl.innerHTML = m.definitions.map((d, i) => {
+
+    const example = d.example
+      ? `<div class="example">"${d.example}"</div>`
+      : "";
+
+    const syns = [
+      ...(d.synonyms || []),
+      ...(m.synonyms || [])
+    ];
+
+    const ants = [
+      ...(d.antonyms || []),
+      ...(m.antonyms || [])
+    ];
+
+    const synonymsHTML = syns.length
+  ? `
+    <div class="part-of-speech synonym">Synonyms</div>
+    <div class="related-list">${makeClickableWords(syns)}</div>
+  `
+  : "";
+
+const antonymsHTML = ants.length
+  ? `
+    <div class="part-of-speech antonym">Antonyms</div>
+    <div class="related-list">${makeClickableWords(ants)}</div>
+  `
+  : "";
+
+
+
+    return `
+      <div class="definition-block">
+        <div class="part-of-speech ${posClass(m.partOfSpeech)}">
+          ${m.partOfSpeech}
+        </div>
+        <div class="definition">${d.definition}</div>
+        ${example}
+
+        <!-- show once per part of speech -->
+        ${i === 0 ? synonymsHTML : ""}
+        ${i === 0 ? antonymsHTML : ""}
+      </div>
+    `;
+  }).join("");
+});
+
+
+
 
     meaningsEl.insertBefore(tab, contentEl);
 
     if (idx === 0) tab.click();
   });
-}
 
+  if (data.origin) {
+    const originEl = document.createElement("div");
+    originEl.className = "origin";
+    originEl.innerHTML = `<strong>Origin:</strong> ${data.origin}`;
+    meaningsEl.appendChild(originEl);
+  }
+}
 
 async function loadWordOfTheDay(){
   try{
-    const words=["innovation","synergy","resilience","ephemeral","curiosity","ambition","clarity","adaptation"];
+    const words=[
+      "innovation","synergy","resilience",
+      "ephemeral","curiosity","ambition",
+      "clarity","adaptation"
+    ];
     const word=words[Math.floor(Math.random()*words.length)];
     const res=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
     const data=await res.json();
-    renderWord(document.getElementById("wotd-word"), document.getElementById("wotd-meanings"), data[0]);
-  } catch(err){ document.getElementById("wotd-word").textContent="Error loading word."; }
+    renderWord(
+      document.getElementById("wotd-word"),
+      document.getElementById("wotd-meanings"),
+      data[0]
+    );
+  } catch(err){
+    document.getElementById("wotd-word").textContent="Error loading word.";
+  }
 }
 
 const input=document.getElementById("dictionary-input");
@@ -427,12 +549,16 @@ const searchMeaningsEl=document.getElementById("search-meanings");
 const searchCard=document.getElementById("search-result");
 
 searchBtn.addEventListener("click", searchWord);
-input.addEventListener("keypress", e=>{ if(e.key==="Enter") searchWord(); });
+input.addEventListener("keypress", e=>{
+  if(e.key==="Enter") searchWord();
+});
 
 async function searchWord(){
   const word=input.value.trim();
   if(!word) return;
-  searchCard.style.display = "block"; 
+
+  searchCard.style.display="block";
+
   try{
     const res=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
     if(!res.ok) throw new Error("Word not found");
@@ -446,6 +572,7 @@ async function searchWord(){
 
 loadWordOfTheDay();
 </script>
+
 
 </body>
 </html>
